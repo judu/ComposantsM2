@@ -20,4 +20,5 @@ public abstract class Configuration extends Composant implements Observer {
 
 
    public abstract Connecteur getConnecteur(Method roleFrom);
+
 }
