@@ -38,6 +38,8 @@ public abstract class Configuration extends Composant implements Observer {
             return;
         }
 
+        Composant cSource = (Composant) o;
+
 
         if (!(arg instanceof Object[])) {
             //TODO: add logs
@@ -52,6 +54,9 @@ public abstract class Configuration extends Composant implements Observer {
 
         String from = (String) args[0];
         Object[] reste = (Object[]) args[1];
+
+        Connecteur conn = this.connecteurs.get(cSource, from);
+        conn.glue(reste);
 
 
     }
