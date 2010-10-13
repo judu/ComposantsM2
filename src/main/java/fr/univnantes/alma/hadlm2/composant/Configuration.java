@@ -45,7 +45,6 @@ public abstract class Configuration extends Composant implements Observer {
         }
 
         Object[] args = (Object[]) arg;
-
         if (args.length < 2) {
             //TODO: add logs
             return;
