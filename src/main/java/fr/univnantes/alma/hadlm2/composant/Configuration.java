@@ -48,6 +48,9 @@ public abstract class Configuration extends Composant implements Observer {
       Object[] reste = (Object[]) args[1];
 
       
+
+
+      
    }
 
 }
