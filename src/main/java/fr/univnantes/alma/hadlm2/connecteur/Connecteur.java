@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package fr.univnantes.alma.hadlm2.connecteur;
 
 import fr.univnantes.alma.hadlm2.composant.Composant;
@@ -19,7 +14,7 @@ public abstract class Connecteur {
    Composant source;
    Composant cible;
 
-   Method roleFrom;
+   String roleFrom;
    Method roleTo;
 
 
@@ -28,7 +23,7 @@ public abstract class Connecteur {
 
    public void glue(Object... args) {
       try {
-         roleTo.invoke(cible, roleFrom.invoke(source, before(args)));
+         roleTo.invoke(cible, before(args));
       } catch (IllegalAccessException ex) {
          Logger.getLogger(Connecteur.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IllegalArgumentException ex) {

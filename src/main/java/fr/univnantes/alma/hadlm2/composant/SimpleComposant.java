@@ -10,5 +10,6 @@ package fr.univnantes.alma.hadlm2.composant;
  * @author judu
  */
 public class SimpleComposant extends Composant {
+   Configuration parent;
 
 }

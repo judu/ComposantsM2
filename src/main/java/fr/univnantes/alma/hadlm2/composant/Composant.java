@@ -11,8 +11,8 @@ public abstract class Composant extends Observable {
    
 	
 	
-	public void call(Method method, Object... args){
-		Object[] toObs = {method, args};
+	public void call(String service, Object... args){
+		Object[] toObs = {service, args};
 		this.notifyObservers(toObs);
 	}
 	
