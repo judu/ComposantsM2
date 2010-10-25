@@ -2,7 +2,6 @@ package fr.univnantes.alma.hadlm2.composant;
 
 import fr.univnantes.alma.hadlm2.connecteur.Connecteur;
 import fr.univnantes.alma.hadlm2.connecteur.ConnecteurPool;
-import fr.univnantes.alma.hadlm2.exceptions.WrongTypeException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,12 @@ public abstract class Configuration extends Composant implements Observer {
         connecteurs = new ConnecteurPool();
     }
 
-    public abstract Connecteur getConnecteur(Method roleFrom);
+    public abstract Connecteur getConnecteur(Composant source, Method roleFrom);
+
+    public void addConnecteur(Connecteur conn) {
+       this.connecteurs.add(conn);
+    }
+
 
     public void addComposant(Composant comp) {
         composants.add(comp);

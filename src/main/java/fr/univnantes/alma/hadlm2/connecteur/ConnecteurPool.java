@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author indy
  */
-public class ConnecteurPool {
+public final class ConnecteurPool {
 
     private List<Connecteur> connecteurList;
 
@@ -29,4 +29,8 @@ public class ConnecteurPool {
         } // for
         return null;
     } // Connecteur getBySource(Composant)
+
+   public void add(Connecteur conn) {
+      connecteurList.add(conn);
+   }
 }

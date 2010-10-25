@@ -19,15 +19,15 @@ public abstract class Connecteur {
 
     public abstract Object[] before(Object... args);
 
-    public String getRoleFrom() {
+    public final String getRoleFrom() {
         return roleFrom;
     }
 
-    public Composant getSource() {
+    public final Composant getSource() {
         return source;
     }
 
-    public void glue(Object... args) {
+    public final void glue(Object... args) {
         try {
             roleTo.invoke(cible, before(args));
         } catch (IllegalAccessException ex) {
