@@ -20,6 +20,10 @@ public final class ConnecteurPool {
         connecteurList = new ArrayList<Connecteur>();
     } // ConnecteurPool()
 
+    public void addConnecteur(Connecteur c){
+        connecteurList.add(c);
+    } // addConnecteur(Connecteur)
+
     public Connecteur get(Composant source, String roleFrom) {
         for (Connecteur connecteur : connecteurList) {
             if (connecteur.getSource().equals(source)
