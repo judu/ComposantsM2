@@ -5,6 +5,9 @@
 package fr.univnantes.alma.hadlm2.connecteur;
 
 import fr.univnantes.alma.hadlm2.composant.Composant;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,27 +17,33 @@ import java.util.List;
  */
 public final class ConnecteurPool {
 
-    private List<ConnecteurSS> connecteurList;
+    private List<Connecteur> connecteurList;
 
     public ConnecteurPool() {
-        connecteurList = new ArrayList<ConnecteurSS>();
+        connecteurList = new ArrayList<Connecteur>();
     } // ConnecteurPool()
 
-    public void addConnecteur(ConnecteurSS c){
+    public void addConnecteur(Connecteur c) {
         connecteurList.add(c);
     } // addConnecteur(Connecteur)
 
-    public ConnecteurSS get(Composant source, String roleFrom) {
-        for (ConnecteurSS connecteur : connecteurList) {
-            if (connecteur.getSource().equals(source)
-                    && connecteur.getRoleFrom().equals(roleFrom)) {
-                return connecteur;
-            } // if
-        } // for
-        return null;
-    } // Connecteur getBySource(Composant)
+    public void add(Connecteur conn) {
+        connecteurList.add(conn);
+    }
 
-   public void add(ConnecteurSS conn) {
-      connecteurList.add(conn);
-   }
+    public List<Connecteur> get(Composant source, AccessibleObject from) {
+        List<Connecteur> result = null;
+        for (Connecteur connecteur : connecteurList) {
+            if (connecteur.getSource().equals(source)
+                    && connecteur.getRoleFrom().getClass().equals(from.getClass())
+                    && connecteur.getRoleFrom().equals(from)) {
+                if (result == null) {
+                    result = new ArrayList<Connecteur>();
+                }
+                result.add(connecteur);
+            }
+        }
+        return result;
+
+    }
 }

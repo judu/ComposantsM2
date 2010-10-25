@@ -10,7 +10,7 @@ import fr.univnantes.alma.hadlm2.composant.Composant;
  *
  * @author indy
  */
-public abstract class Connecteur <F,T> {
+public abstract class Connecteur<F, T> {
 
     protected Composant source;
     protected Composant cible;
@@ -58,4 +58,6 @@ public abstract class Connecteur <F,T> {
     public final Composant getSource() {
         return source;
     }
+
+    public abstract void glue();
 }

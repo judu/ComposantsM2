@@ -1,7 +1,9 @@
 package fr.univnantes.alma.hadlm2.composant;
 
+import fr.univnantes.alma.hadlm2.connecteur.Connecteur;
 import fr.univnantes.alma.hadlm2.connecteur.ConnecteurSS;
 import fr.univnantes.alma.hadlm2.connecteur.ConnecteurPool;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +27,8 @@ public abstract class Configuration extends Composant implements Observer {
     public abstract ConnecteurSS getConnecteur(Composant source, Method roleFrom);
 
     public void addConnecteur(ConnecteurSS conn) {
-       this.connecteurs.add(conn);
+        this.connecteurs.add(conn);
     }
-
 
     public final void addComposant(Composant comp) {
         composants.add(comp);
@@ -43,28 +44,23 @@ public abstract class Configuration extends Composant implements Observer {
             return;
         }
 
-        Composant cSource = (Composant) o;
+        Composant source = (Composant) o;
 
-
-        if (!(arg instanceof Object[])) {
+        if (arg instanceof Field) {
+            Field from = (Field) arg;
+            List<Connecteur> conns = this.connecteurs.get(source, from);
+            for (Connecteur conn : conns) {
+                conn.glue();
+            }
+        } else if (arg instanceof Method) {
+            Method from = (Method) arg;
+            List<Connecteur> conns = this.connecteurs.get(source, from);
+            for (Connecteur conn : conns) {
+                conn.glue();
+            }
+        } else {
             //TODO: add logs
-            return;
         }
-
-        
-
-//        Object[] args = (Object[]) arg;
-//        if (args.length < 2) {
-//            //TODO: add logs
-//            return;
-//        }
-//
-//        String from = (String) args[0];
-//        Object[] reste = (Object[]) args[1];
-//
-//        ConnecteurSS conn = this.connecteurs.get(cSource, from);
-//        conn.glue(reste);
-
 
     }
 }
