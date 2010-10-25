@@ -51,17 +51,19 @@ public abstract class Configuration extends Composant implements Observer {
             return;
         }
 
-        Object[] args = (Object[]) arg;
-        if (args.length < 2) {
-            //TODO: add logs
-            return;
-        }
+        
 
-        String from = (String) args[0];
-        Object[] reste = (Object[]) args[1];
-
-        ConnecteurSS conn = this.connecteurs.get(cSource, from);
-        conn.glue(reste);
+//        Object[] args = (Object[]) arg;
+//        if (args.length < 2) {
+//            //TODO: add logs
+//            return;
+//        }
+//
+//        String from = (String) args[0];
+//        Object[] reste = (Object[]) args[1];
+//
+//        ConnecteurSS conn = this.connecteurs.get(cSource, from);
+//        conn.glue(reste);
 
 
     }
