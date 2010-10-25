@@ -14,18 +14,18 @@ import java.util.List;
  */
 public final class ConnecteurPool {
 
-    private List<Connecteur> connecteurList;
+    private List<ConnecteurSS> connecteurList;
 
     public ConnecteurPool() {
-        connecteurList = new ArrayList<Connecteur>();
+        connecteurList = new ArrayList<ConnecteurSS>();
     } // ConnecteurPool()
 
-    public void addConnecteur(Connecteur c){
+    public void addConnecteur(ConnecteurSS c){
         connecteurList.add(c);
     } // addConnecteur(Connecteur)
 
-    public Connecteur get(Composant source, String roleFrom) {
-        for (Connecteur connecteur : connecteurList) {
+    public ConnecteurSS get(Composant source, String roleFrom) {
+        for (ConnecteurSS connecteur : connecteurList) {
             if (connecteur.getSource().equals(source)
                     && connecteur.getRoleFrom().equals(roleFrom)) {
                 return connecteur;
@@ -34,7 +34,7 @@ public final class ConnecteurPool {
         return null;
     } // Connecteur getBySource(Composant)
 
-   public void add(Connecteur conn) {
+   public void add(ConnecteurSS conn) {
       connecteurList.add(conn);
    }
 }

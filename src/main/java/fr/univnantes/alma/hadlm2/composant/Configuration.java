@@ -1,6 +1,6 @@
 package fr.univnantes.alma.hadlm2.composant;
 
-import fr.univnantes.alma.hadlm2.connecteur.Connecteur;
+import fr.univnantes.alma.hadlm2.connecteur.ConnecteurSS;
 import fr.univnantes.alma.hadlm2.connecteur.ConnecteurPool;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -22,16 +22,17 @@ public abstract class Configuration extends Composant implements Observer {
         connecteurs = new ConnecteurPool();
     }
 
-    public abstract Connecteur getConnecteur(Composant source, Method roleFrom);
+    public abstract ConnecteurSS getConnecteur(Composant source, Method roleFrom);
 
-    public void addConnecteur(Connecteur conn) {
+    public void addConnecteur(ConnecteurSS conn) {
        this.connecteurs.add(conn);
     }
 
 
-    public void addComposant(Composant comp) {
+    public final void addComposant(Composant comp) {
         composants.add(comp);
         comp.addObserver(this);
+        comp.setParent(this);
     }
 
     @Override
@@ -59,7 +60,7 @@ public abstract class Configuration extends Composant implements Observer {
         String from = (String) args[0];
         Object[] reste = (Object[]) args[1];
 
-        Connecteur conn = this.connecteurs.get(cSource, from);
+        ConnecteurSS conn = this.connecteurs.get(cSource, from);
         conn.glue(reste);
 
 
