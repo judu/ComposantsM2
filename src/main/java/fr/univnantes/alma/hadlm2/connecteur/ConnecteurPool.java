@@ -6,8 +6,6 @@ package fr.univnantes.alma.hadlm2.connecteur;
 
 import fr.univnantes.alma.hadlm2.composant.Composant;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 

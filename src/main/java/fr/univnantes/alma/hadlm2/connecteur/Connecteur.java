@@ -59,5 +59,9 @@ public abstract class Connecteur<F, T> {
         return source;
     }
 
+    public final Composant getCible() {
+        return cible;
+    }
+
     public abstract void glue();
 }
