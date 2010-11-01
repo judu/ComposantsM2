@@ -1,0 +1,8 @@
+Entrées/Sorties des services fournis et requis :
+  Service fourni : T SF();
+  Service requis : void SR(T);
+    La gestion de services fournis paramétrés se fera par le biais d'accès à des
+  attributs privés (pas nécessairement des ports) du composant fournissant le
+  service.
+    De même, plutôt qu'une valeur de retour, le service requis pourra modifier
+  des attributs privés du composant recquiérant ledit service.
