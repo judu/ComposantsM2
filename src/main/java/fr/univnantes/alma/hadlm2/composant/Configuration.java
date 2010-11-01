@@ -62,7 +62,7 @@ public abstract class Configuration extends Composant implements Observer {
         if (!(o instanceof Composant)) {
             //TODO: add logs
             return;
-        }
+        } // if
 
         Composant source = (Composant) o;
 
@@ -71,7 +71,7 @@ public abstract class Configuration extends Composant implements Observer {
             List<Connecteur> conns = this.connecteurs.get(source, from);
             for (Connecteur conn : conns) {
                 conn.glue();
-            }
+            } // for
         } else if (arg instanceof Method) {
             Method from = (Method) arg;
             List<Connecteur> conns = this.connecteurs.get(source, from);
@@ -80,7 +80,7 @@ public abstract class Configuration extends Composant implements Observer {
             }
         } else {
             //TODO: add logs
-        }
+        } // if
 
     }
 }
