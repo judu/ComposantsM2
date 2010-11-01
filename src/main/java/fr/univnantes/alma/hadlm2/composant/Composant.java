@@ -10,9 +10,8 @@ public abstract class Composant extends Observable {
 
     protected Configuration parent;
 
-    public void call(String service, Object... args) {
-        Object[] toObs = {service, args};
-        this.notifyObservers(toObs);
+    public void call(String service) {
+        this.notifyObservers(service);
     }
 
     public void setParent(Configuration c) {
