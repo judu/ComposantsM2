@@ -5,28 +5,33 @@
 package fr.univnantes.alma.hadlm2.connecteur;
 
 import fr.univnantes.alma.hadlm2.composant.Composant;
+import java.lang.reflect.AccessibleObject;
 
 /**
  *
  * @author judu
  */
-public abstract class Binding {
+public class Binding<T extends AccessibleObject> {
 
-   protected String src;
+    protected T src;
+    protected Composant target;
+    protected T targetInterface;
 
-   protected  Composant target;
+    public Binding(T src, Composant target, T targetI) {
+        this.src = src;
+        this.target = target;
+        this.targetInterface = targetI;
+    }
 
-   protected  String targetInterface;
+    public T getSource() {
+        return src;
+    }
 
+    public Composant getTarget() {
+        return target;
+    }
 
-   public Binding(String src, Composant target, String targetI) {
-      this.src = src;
-      this.target = target;
-      this.targetInterface = targetI;
-   }
-
-
-
-   public abstract void glue(Object... args);
-
+    public T getTargetInterface() {
+        return targetInterface;
+    }
 }

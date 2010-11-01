@@ -1,5 +1,6 @@
 package fr.univnantes.alma.hadlm2.composant;
 
+import java.lang.reflect.AccessibleObject;
 import java.util.Observable;
 
 /**
@@ -13,6 +14,8 @@ public abstract class Composant extends Observable {
     public void call(String service) {
         this.notifyObservers(service);
     }
+
+    protected abstract <I extends AccessibleObject> Boolean getInterface(I iface);
 
     public void setParent(Configuration c) {
         parent = c;
