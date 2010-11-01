@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class ConnecteurPP extends Connecteur<Field,Field> {
 
+    @Override
     public final void glue(){
         try {
             roleTo.set(cible, before(roleFrom.get(source)));

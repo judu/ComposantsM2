@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  */
 public abstract class ConnecteurPS extends Connecteur<Field,Method> {
 
+    @Override
     public final void glue(){
         try {
             roleTo.invoke(cible, before(roleFrom.get(source)));

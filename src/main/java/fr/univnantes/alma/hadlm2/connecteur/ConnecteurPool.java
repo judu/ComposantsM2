@@ -37,10 +37,10 @@ public final class ConnecteurPool {
                     && connecteur.getRoleFrom().equals(from)) {
                 if (result == null) {
                     result = new ArrayList<Connecteur>();
-                }
+                } // if
                 result.add(connecteur);
-            }
-        }
+            } // if
+        } // for
         return result;
 
     }
