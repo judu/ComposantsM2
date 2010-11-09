@@ -15,7 +15,7 @@ public abstract class Composant extends Observable {
         this.notifyObservers(service);
     }
 
-    protected abstract <I extends AccessibleObject> Boolean getInterface(I iface);
+    protected abstract <I extends AccessibleObject> boolean hasInterface(I iface);
 
     public void setParent(Configuration c) {
         parent = c;

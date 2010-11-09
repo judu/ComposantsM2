@@ -14,8 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -86,7 +84,7 @@ public abstract class Configuration extends Composant implements Observer {
 
     private <I extends AccessibleObject> void pushBinding(I source, Composant target, I targetInterface)
             throws NoSuchInterfaceException, NoSuchComponentException {
-        if (!this.getInterface(source)) {
+        if (!this.hasInterface(source)) {
             throw new NoSuchInterfaceException("addBinding: no source interface.");
         }
         checkComposant:
@@ -98,7 +96,7 @@ public abstract class Configuration extends Composant implements Observer {
             } // for
             throw new NoSuchComponentException("addBinding: no target component.");
         }
-        if (!target.getInterface(targetInterface)) {
+        if (!target.hasInterface(targetInterface)) {
             throw new NoSuchInterfaceException("addBinding: no targetInterface interface in target Component.");
         }
         bindings.add(new Binding<I>(source, target, targetInterface));
