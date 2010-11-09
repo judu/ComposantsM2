@@ -1,6 +1,8 @@
 package fr.univnantes.alma.hadlm2.composant;
 
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Observable;
 
 /**
@@ -15,7 +17,19 @@ public abstract class Composant extends Observable {
         this.notifyObservers(service);
     }
 
-    protected abstract <I extends AccessibleObject> boolean hasInterface(I iface);
+    protected final boolean hasInterface(AccessibleObject iface) {
+        for (Field f : this.getClass().getDeclaredFields()) {
+            if (f.equals(iface)) {
+                return true;
+            }
+        }
+        for (Method m : this.getClass().getDeclaredMethods()) {
+            if (m.equals(iface)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void setParent(Configuration c) {
         parent = c;

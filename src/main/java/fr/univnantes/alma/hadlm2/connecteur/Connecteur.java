@@ -69,10 +69,6 @@ public abstract class Connecteur<F extends AccessibleObject, T extends Accessibl
       this.cible = cible;
    }
 
-   public final F getRoleFrom() {
-      return roleFrom;
-   }
-
    @Override
    public boolean equals(Object obj) {
       if (obj == null) {
@@ -113,6 +109,14 @@ public abstract class Connecteur<F extends AccessibleObject, T extends Accessibl
 
    public final Composant getCible() {
       return cible;
+   }
+
+   public final F getRoleFrom() {
+      return roleFrom;
+   }
+
+   public final T getRoleTo() {
+       return roleTo;
    }
 
    public abstract void glue();

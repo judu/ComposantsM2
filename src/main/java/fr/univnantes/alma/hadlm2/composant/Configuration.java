@@ -31,15 +31,19 @@ public abstract class Configuration extends Composant implements Observer {
         bindings = new ArrayList<Binding>();
     }
 
-    public abstract List<Connecteur> getConnecteurs(Composant source, Method roleFrom);
+    public final List<Connecteur> getConnecteurs(Composant source, Method roleFrom) {
+        return connecteurs.get(source, roleFrom);
+    }
 
     public final void addConnecteur(Connecteur conn) throws NoSuchComponentException {
         Composant source = conn.getSource();
         Composant cible = conn.getCible();
+        AccessibleObject from = conn.getRoleFrom();
+        AccessibleObject to = conn.getRoleTo();
         checkSource:
         {
             for (Composant comp : composants) {
-                if (comp.equals(source)) {
+                if (comp.equals(source) && comp.hasInterface(from)) {
                     break checkSource;
                 } // if
             } // for
@@ -48,7 +52,7 @@ public abstract class Configuration extends Composant implements Observer {
         checkCible:
         {
             for (Composant comp : composants) {
-                if (comp.equals(cible)) {
+                if (comp.equals(cible) && comp.hasInterface(to)) {
                     break checkCible;
                 } // if
             } // for
