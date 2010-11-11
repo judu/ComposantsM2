@@ -14,6 +14,7 @@ public abstract class Composant extends Observable {
     protected Configuration parent;
 
     public void call(String service) {
+        this.setChanged();
         this.notifyObservers(service);
     }
 

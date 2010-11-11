@@ -31,6 +31,19 @@ public abstract class Configuration extends Composant implements Observer {
         bindings = new ArrayList<Binding>();
     }
 
+    public void call(String service) {
+        for (Binding b : bindings) {
+            if (b.getSource() instanceof Method
+                    && ((Method) b.getSource()).getName().equals(service)) {
+                b.getTarget().call(((Method) b.getTargetInterface()).getName());
+                System.out.println(b.getTarget());
+                break;
+            }
+        }
+        this.setChanged();
+        this.notifyObservers(service);
+    }
+
     public final List<Connecteur> getConnecteurs(Composant source, Method roleFrom) {
         return connecteurs.get(source, roleFrom);
     }
