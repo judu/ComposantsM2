@@ -14,15 +14,12 @@ import java.lang.reflect.Method;
  *
  * @author indy
  */
-public abstract class Connecteur<F extends AccessibleObject, T extends AccessibleObject, S, E> {
+public abstract class Connecteur<F extends AccessibleObject, T extends AccessibleObject> {
 
     protected Composant source;
     protected Composant cible;
     protected F roleFrom;
     protected T roleTo;
-
-    protected Connecteur() {
-    }
 
     public Connecteur(Composant source, F roleFrom, Composant cible, T roleTo) throws WrongTypeException {
         //Check les types
@@ -74,7 +71,7 @@ public abstract class Connecteur<F extends AccessibleObject, T extends Accessibl
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ConnecteurSS other = (ConnecteurSS) obj;
+        final Connecteur other = (Connecteur) obj;
         if (this.roleFrom != other.roleFrom && (this.roleFrom == null || !this.roleFrom.equals(other.roleFrom))) {
             return false;
         }
@@ -98,7 +95,7 @@ public abstract class Connecteur<F extends AccessibleObject, T extends Accessibl
         return hash;
     }
 
-    public abstract S before(E arg);
+    public abstract <S, E> S before(E arg);
 
     public final Composant getSource() {
         return source;

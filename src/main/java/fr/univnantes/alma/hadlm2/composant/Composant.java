@@ -4,6 +4,8 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +18,23 @@ public abstract class Composant extends Observable {
     public void call(String service) {
         this.setChanged();
         this.notifyObservers(service);
+    }
+
+    public void set(String port, Object value) {
+        for (Field f : this.getClass().getDeclaredFields()) {
+            if (f.getName().equals(port)
+                    && f.getType().equals(value.getClass())) {
+                try {
+                    f.set(this, value);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(Composant.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Composant.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.call(port);
+                break;
+            } // if
+        } // for
     }
 
     protected final <I extends AccessibleObject> boolean hasInterface(I iface) {

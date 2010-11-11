@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author indy
  */
-public abstract class ConnecteurPP<S, E> extends Connecteur<Field, Field, S, E> {
+public abstract class ConnecteurPP extends Connecteur<Field, Field> {
 
     public ConnecteurPP(Composant source, Field roleFrom, Composant cible, Field roleTo) throws WrongTypeException {
         super(source, roleFrom, cible, roleTo);
@@ -29,10 +29,5 @@ public abstract class ConnecteurPP<S, E> extends Connecteur<Field, Field, S, E> 
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ConnecteurPP.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    private Object before(Object get) {
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

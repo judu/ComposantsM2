@@ -43,6 +43,17 @@ public abstract class Configuration extends Composant implements Observer {
         this.notifyObservers(service);
     }
 
+    public void set(String port, Object value) {
+        for (Binding b : bindings) {
+            if (b.getSource() instanceof Field
+                    && ((Field) b.getSource()).getName().equals(port)
+                    && ((Field) b.getSource()).getType().equals(value.getClass())) {
+                b.getTarget().set(((Field)b.getTargetInterface()).getName(),value);
+                break;
+            }
+        }
+    }
+
     public final List<Connecteur> getConnecteurs(Composant source, Method roleFrom) {
         return connecteurs.get(source, roleFrom);
     }
