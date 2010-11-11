@@ -36,7 +36,6 @@ public abstract class Configuration extends Composant implements Observer {
             if (b.getSource() instanceof Method
                     && ((Method) b.getSource()).getName().equals(service)) {
                 b.getTarget().call(((Method) b.getTargetInterface()).getName());
-                System.out.println(b.getTarget());
                 break;
             }
         }
@@ -132,43 +131,32 @@ public abstract class Configuration extends Composant implements Observer {
         String name = (String) arg;
         Field field = null;
         Method method = null;
-        Boolean found = Boolean.FALSE;
-        Field[] declaredFields = source.getClass().getDeclaredFields();
-
-        int i = 0;
-        while (i++ < declaredFields.length && !found) {
-            Field f = declaredFields[i];
-            if (f.getName().equals(name)) {
-                field = f;
-                found = Boolean.TRUE;
-            }
-        }
-
-        if (!found) {
-            Method[] declaredMethods = source.getClass().getDeclaredMethods();
-            i = 0;
-            while (i++ < declaredMethods.length && !found) {
-                Method m = declaredMethods[i];
-                if (m.getName().equals(name)) {
-                    method = m;
-                    found = Boolean.TRUE;
+        loops:
+        {
+            for (Field f : source.getClass().getDeclaredFields()) {
+                if (f.getName().equals(name)) {
+                    field = f;
+                    break loops;
                 }
             }
+            for (Method m : source.getClass().getDeclaredMethods()) {
+                if (m.getName().equals(name)) {
+                    method = m;
+                    break loops;
+                }
+            }
+            return;
         }
 
-        if (found) {
-            List<Connecteur> conns = null;
-            if (field != null) {
-                conns = this.connecteurs.get(source, field);
-            } else if (method != null) {
-                conns = this.connecteurs.get(source, method);
-            }
-            for (Connecteur conn : conns) {
-                conn.glue();
-            } // for
-        } else {
-            //TODO: add logs
-            return;
-        } // if
+        List<Connecteur> conns = null;
+        if (field != null) {
+            conns = this.connecteurs.get(source, field);
+        } else if (method != null) {
+            conns = this.connecteurs.get(source, method);
+        }
+        for (Connecteur conn : conns) {
+            conn.glue();
+        } // for
+
     }
 }

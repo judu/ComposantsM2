@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fr.univnantes.alma.hadlm2.connecteur;
 
 import fr.univnantes.alma.hadlm2.composant.Composant;
@@ -15,16 +14,14 @@ import java.util.logging.Logger;
  *
  * @author indy
  */
-public abstract class ConnecteurPP extends Connecteur<Field,Field> {
+public abstract class ConnecteurPP<S, E> extends Connecteur<Field, Field, S, E> {
 
+    public ConnecteurPP(Composant source, Field roleFrom, Composant cible, Field roleTo) throws WrongTypeException {
+        super(source, roleFrom, cible, roleTo);
+    }
 
-
-   public ConnecteurPP(Composant source, Field roleFrom, Composant cible, Field roleTo) throws WrongTypeException {
-      super(source, roleFrom, cible, roleTo);
-   }
-
-   @Override
-    public final void glue(){
+    @Override
+    public final void glue() {
         try {
             roleTo.set(cible, before(roleFrom.get(source)));
         } catch (IllegalArgumentException ex) {
@@ -32,5 +29,10 @@ public abstract class ConnecteurPP extends Connecteur<Field,Field> {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ConnecteurPP.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    private Object before(Object get) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

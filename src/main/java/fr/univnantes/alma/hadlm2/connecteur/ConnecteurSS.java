@@ -11,15 +11,13 @@ import java.util.logging.Logger;
  *
  * @author judu
  */
-public abstract class ConnecteurSS extends Connecteur<Method,Method> {
+public abstract class ConnecteurSS<S extends Object, E extends Object> extends Connecteur<Method, Method,S,E> {
 
+    public ConnecteurSS(Composant source, Method roleFrom, Composant cible, Method roleTo) throws WrongTypeException {
+        super(source, roleFrom, cible, roleTo);
+    }
 
-   public ConnecteurSS(Composant source, Method roleFrom, Composant cible, Method roleTo) throws WrongTypeException {
-      super(source, roleFrom, cible, roleTo);
-   }
-
-
-   @Override
+    @Override
     public final void glue() {
         try {
             roleTo.invoke(cible, before(roleFrom.invoke(source)));
