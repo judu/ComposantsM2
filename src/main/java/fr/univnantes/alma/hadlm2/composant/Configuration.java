@@ -21,9 +21,9 @@ import java.util.Observer;
  */
 public abstract class Configuration extends Composant implements Observer {
 
-    protected List<Composant> composants;
-    protected ConnecteurPool connecteurs;
-    protected List<Binding> bindings;
+    private List<Composant> composants;
+    private ConnecteurPool connecteurs;
+    private List<Binding> bindings;
 
     public Configuration() {
         composants = new ArrayList<Composant>();
