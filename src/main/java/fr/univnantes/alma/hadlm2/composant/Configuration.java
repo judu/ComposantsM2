@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -170,4 +171,8 @@ public abstract class Configuration extends Composant implements Observer {
         } // for
 
     }
+
+   public List<Composant> getComposants() {
+      return Collections.unmodifiableList(composants);
+   }
 }
