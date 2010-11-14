@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +38,7 @@ public abstract class Configuration extends Composant implements Observer {
 
    @Override
    public void call(String service) {
+      Logger.getAnonymousLogger().log(Level.INFO, "Call service {0}", service);
       for (Binding b : bindings) {
          if (b.getSource() instanceof Method
                  && ((Method) b.getSource()).getName().equals(service)) {
@@ -144,6 +147,8 @@ public abstract class Configuration extends Composant implements Observer {
 
       Composant source = (Composant) o;
 
+      Logger.getAnonymousLogger().log(Level.INFO, "Update requested by{0}", source.getClass().getName());
+
       String name = (String) arg;
       Field field = null;
       Method method = null;
@@ -170,9 +175,13 @@ public abstract class Configuration extends Composant implements Observer {
       } else if (method != null) {
          conns = this.connecteurs.get(source, method);
       }
-      for (Connecteur conn : conns) {
-         conn.glue();
-      } // for
+      if (conns != null) {
+         for (Connecteur conn : conns) {
+            conn.glue();
+         } // for
+      } else {
+         Logger.getAnonymousLogger().log(Level.WARNING, "conns null");
+      }
 
    }
 
